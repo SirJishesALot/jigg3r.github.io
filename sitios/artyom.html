@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Artyom.js | Librería de reconocimiento de voz, comandos de voz  y síntesis de texto en Javascript</title>
+        <meta name="theme-color" content="#4285f4">
+        <meta name="description" content="Artyom es una libreria hecha en javascript de reconocimiento de voz que te permite añadir comandos de voz y síntesis de texto a tu página web facilmente." />
+        <meta property="og:site_name" content="SDkCarlos Github"/>
+        <meta property="og:title" content="Artyom.js"/>
+        <meta property="og:image" content="https://sdkcarlos.github.io/material/images/artyomjs-logo.png"/>
+        <meta property="og:url" content="https://sdkcarlos.github.io/sitios/artyom.html"/>
+        <meta property="og:description" content="Artyom es una libreria hecha en javascript de reconocimiento de voz que te permite añadir comandos de voz y síntesis de texto a tu página web facilmente."/>
+        <meta name="keywords" content="reconocimiento de voz, comandos de voz, síntesis de voz, libreria javascript,voz, comandos">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@sdkcarlos1911">
+        <meta name="twitter:creator" content="@sdkcarlos1911">
+        <meta name="twitter:title" content="Artyom.js">
+        <meta name="twitter:description" content="Artyom es una libreria hecha en javascript de reconocimiento de voz que te permite añadir comandos de voz y síntesis de texto a tu página web facilmente.">
+        <meta name="twitter:image:src" content="https://sdkcarlos.github.io/material/images/artyomjs-logo.png">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+        <link href="../material/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../material/css/mdb.min.css" rel="stylesheet">
+        <link href="../material/css/style.css" rel="stylesheet">
+        <link href="../libs/prismjs/prism.css" rel="stylesheet">
+        <script type="text/javascript" src="../libs/artyom/artyom.js"></script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-68362173-1', 'auto');
+            ga('send', 'pageview');
+
+            if (window.location.protocol != "https:"){
+                window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
+            }
+
+            window.artyom = new Artyom();
+        </script>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-dark navbar-fixed-top scrolling-navbar primary-color">
+                <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx">
+                    <i class="fa fa-bars"></i></button>
+                <div class="container">
+                    <div class="collapse navbar-toggleable-xs" id="collapseEx">
+                        <a class="navbar-brand" href="javascript:void(0);" target="_blank">Artyom.js</a>
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link scroll-to" href="#section-home">Inicio <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link scroll-to" href="#section-download">Descargar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link scroll-to" href="#section-voicecommands">Comandos de voz</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link scroll-to" href="#section-initialize">Inicialización</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link scroll-to" href="#section-speechapi">Síntesis de texto</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link scroll-to" href="#section-otherfeatures">Otras funciones</a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav nav-flex-icons">
+                            <li class="nav-item">
+                                <a href="https://www.facebook.com/ourcodeworld" target="_blank" class="nav-link"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://twitter.com/ourcodeworld" target="_blank" class="nav-link"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/sdkcarlos/artyom.js" target="_blank" class="nav-link"><i class="fa fa-github"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main class="p-t-6">
+            <div class="container">
+                <section id="section-home">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="view overlay hm-white-light">
+                                <img style="max-width: 300px;" src="../material/images/artyomjs-logo.png" class="center-block img-fluid" alt="">
+                                <div class="mask">
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                        <div class="col-md-8">
+                            <h2 class="h2-responsive">Usa comandos de voz y síntesis de texto facilmente</h2>
+                            <hr>
+                            <p>Artyom.js es un wrapper de las reconocidas APIs <code>speechSynthesis</code> y <code>webkitSpeechRecognition</code> de Google.</p>
+                            <p>Además artyom.js te permite añadir comandos de voz a tu sitio web facilmente, construye tu propio Google Now, Cortana o Siri en tu sitio web usando javascript !</p>
+                            <a href="https://github.com/sdkcarlos/artyom.js" class="btn btn-primary"><i class='fa fa-github'></i> Repositorio en Github</a>
+                            <a href="http://docs.ourcodeworld.com/projects/artyom-js" class="btn btn-primary">
+                                Leer documentación (Ingles)
+                            </a>
+                            <a href="#section-download" class="btn btn-primary scroll-to">
+                                Descarga Artyom.js (<span id='latest-stable-version'></span> última versión)
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                <section id="section-download">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="jumbotron">
+                                <h2 class="h2-responsive">Descargar .zip</h2>
+                                <br>
+                                <a target="_blank" href="https://github.com/sdkcarlos/artyom.js/raw/master/public/artyom-source.zip" type="button" class="btn btn-block btn-primary btn-stc waves-effect waves-light">Descargar <i class="fa fa-download right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="jumbotron">
+                                <h2 class="h2-responsive">Obtener en npm</h2>
+                                <br>
+                                <pre><code class="lang-batch">npm install artyom.js</code></pre>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="jumbotron">
+                                <h2 class="h2-responsive">Obtener en bower</h2>
+                                <br>
+                                <pre><code class="lang-batch">bower install artyom.js</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-block">
+                                    <h4 class="card-title">Instalación</h4>
+                                    <p class="card-text">Simplemente agrega una referencia a la librería de artyom en el head tag de tu documento y estás listo para usarlo!</p>
+                                    <pre><code class="lang-html">&#x3C;head&#x3E;
+    &#x3C;script src=&#x22;artyom.min.js&#x22;&#x3E;&#x3C;/script&#x3E;
+&#x3C;/head&#x3E;</code></pre>
+                                    <p>La variable global <code>artyom</code> estará disponible en tu documento ahora.</p>
+                                    <blockquote class="blockquote bq-warning">
+                                        <p class="bq-title">Nota</p>
+                                        <p>Necesitas cargar artyom.js en el head tag para pre-cargar las voces en caso de que uses la API de speechSynthesis. De otra manera, puedes cargar artyom al final del body tag como haces con cualquier otro script.</p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="section-artyominthisbrowser">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="card">
+                                <h3 class="card-header primary-color white-text">Acerca de Artyom en este explorador</h3>
+                                <div class="card-block">
+                                    <h5 class="card-title" id="artyom-about-useragent">Cargando información ..</h5>
+                                    <p class="card-text">Dependiendo de tu explorador favorito, las APIs speech synthesis y speech recognition pueden estar o no disponibles de manera separada, usa los métodos <code>artyom.speechSupported</code> y <code>artyom.recognizingSupported</code> para saberlo.</p>
+                                    <div id="artyom-about-panelinfo">
+
+                                    </div>
+                                    <p class="card-text">Estas son las voces disponibles para artyom en este explorador. Puedes ver los códigos de lenguages en el area de inicialización o lee la documentación.</p>
+                                    <select id='tag-availablevoices' class="form-control">
+                                        <option value="">Cargando voces ...</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="card card-dark">
+                                <div class="view overlay hm-white-slight" style="background-color: #242424;">
+                                    <img src="http://ourcodeworld.com/public-media/advertising/ourcodeeditor_quad_banner.png" class="center-block img-fluid" alt="">
+                                    <a href="http://bit.ly/OurCodeEditorFree" target="_blank">
+                                        <div class="mask"></div>
+                                    </a>
+                                </div>
+                                <a class="activator"><i class="fa fa-android"></i></a>
+                                <div class="card-block">
+                                    <h4 class="card-title">Our Code Editor</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-block text-xs-center" style="width: 100%;min-height:100px;">
+                                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-7687344986141325"
+                                     data-ad-slot="3487567897"
+                                     data-ad-format="auto"></ins>
+                                <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section id="section-voicecommands">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-block">
+                                    <blockquote class="blockquote bq-primary">
+                                        <p class="bq-title"><i class='fa fa-info-circle'></i> Dale algunas ordenes a artyom en este sitio web.</p>
+                                        <p>Desde que estás en este sitio, artyom esta activo (si es soportado). Prueba con algunos de los comandos mostrados a continuación, comienza a hablar para probarlos!</p>
+                                    </blockquote>
+                                    <div class='table-responsive'>
+                                        <table id='command-table' class='table table-hover'>
+                                            <thead>
+                                                <tr>
+                                                    <th>Activar comando diciendo</th>
+                                                    <th>Descripción</th>
+                                                    <th>Smart</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <hr>
+                                    <h4 class="card-title">Comandos de voz</h4>
+                                    <p class="card-text">
+                                        Antes de comenzar con la inicialización de artyom, agregaremos un par de comandos para que sean procesados. Usa el método <code>artyom.addCommands(commands)</code> para agregar comandos.
+                                    </p>
+                                    <p>Cada comando se compone de un objeto literal con algunas propiedades. Hay 2 tipos de comandos, <b>normales</b> y <b>smarts</b>.</p>
+                                    <p>Un comando smart the permite obtener el valor de una frase hablada que soporta un comodín. Cada comando puede ser activado por alguno de los valores dados en el array de la propiedad índices.</p>
+                                    <pre><code class="lang-js">// Add a single command
+var comandoHola = {
+    indexes:[&#x22;Hola&#x22;,&#x22;buenos días&#x22;,&#x22;holita&#x22;], // Decir alguna de estas palabras activara el comando
+    action:function(){ // Acción a ejecutar cuando alguna palabra de los indices es reconocida
+        artyom.say(&#x22;Hola! como estás hoy?&#x22;);
+    }
+};
+
+artyom.addCommands(comandoHola); // Agregar comando
+
+// Or add multiple commands at time
+var myGroup = [
+    {
+        description:&#x22;Si mi base de datos contiene alguno del nombre dicho, hacer algo&#x22;,
+        smart:true, // Activar comando como un comando smart para poder usar comodines
+        indexes:[&#x22;Sabes quien es *&#x22;,&#x22;No se quien  *&#x22;,&#x22;Es * una buena persona&#x22;],
+        // Ejecutar acción
+        // i continene el indice que coincide con lo dicho en el array
+        action:function(i,wildcard){
+            var database = [&#x22;Carlos&#x22;,&#x22;Bruce&#x22;,&#x22;David&#x22;,&#x22;Joseph&#x22;,&#x22;Kenny&#x22;];
+
+            //Si lo dicho, coincide con la tercera propiedad de los indices
+            //es decir, &#x22;Es xxx una buena persona&#x22;, haga X, de lo contrario Y
+            if(i == 2){
+                if(database.indexOf(wildcard.trim())){
+                    artyom.say(&#x22;Soy una máquina, nisiquiera se que es un sentimiento.&#x22;);
+                }else{
+                    artyom.say(&#x22;No se quien es &#x22; + wildcard + &#x22; y no se como demonios podría decir si es una buena persona o no.&#x22;);
+                }
+            }else{
+                if(database.indexOf(wildcard.trim())){
+                    artyom.say(&#x22;Por supuesto que se quien es &#x22;+ wildcard + &#x22;. Una muy buena persona a mi parecer.&#x22;);
+                }else{
+                    artyom.say(&#x22;Mi base de datos no es lo suficientemente amplia, no se quien es &#x22; + wildcard);
+                }
+            }
+        }
+    },
+    {
+        indexes:[&#x22;Que hora es&#x22;,&#x22;Es muy tarde&#x22;],
+        action:function(i){
+            if(i == 0){
+                UnaFuncionQueDiceElTiempo(new Date());
+            }else if(i == 1){
+                artyom.say(&#x22;Nunca es tarde para hacer algo mi amigo!&#x22;);
+            }
+        }
+    }
+];
+
+artyom.addCommands(myGroup); </code></pre>
+                                    <blockquote class="blockquote bq-primary">
+                                        <p class="bq-title"><i class='fa fa-info-circle'></i> Pro tip</p>
+                                        <p>Puedes añadir comandos de manera dinámica mientras artyom está activo. Los comandos son guardados en un array lo que los hace facil de procesar incluso cuando artyom está activo.</p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-block text-xs-center" style="width: 100%;min-height:100px;">
+                                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-7687344986141325"
+                                     data-ad-slot="3487567897"
+                                     data-ad-format="auto"></ins>
+                                <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section id="section-initialize">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-block">
+                                    <h4 class="card-title">Inicializando Artyom.js</h4>
+                                    <p class="card-text">
+                                        Ahora que artyom.js tiene algunos comandos que pueden ser procesados, podemos iniciar artyom. Artyom puede funcionar en 2 modos, continuo e discontinuo.
+                                    </p>
+                                    <p>Recuerda tambien que artyom the deja la posibilidad de procesar los comandos usando un lenguaje de servidor en vez de procesarlos localmente con javascript, solo debes activar artyom <a href="http://ourcodeworld.com/projects/projects-documentation/15/read-doc/artyom-initialize/artyom-js" target="_blank">en el modo remoto</a> y usar el método <code>artyom.remoteProcessorService</code> para obtener el texto y hacer algun llamado al servidor por ejemplo.</p>
+                                    <blockquote class="blockquote bq-primary">
+                                        <p class="bq-title">Nota</p>
+                                        <p>Para poder usar Artyom.js en modo continuo , necesitaras un certificados SSL funcional en tu sitio web (conexión https), de otra manera el explorador solicitara el permiso para usar el microfono cada vez que artyom.js reconoce un comando o el reconocimiento finaliza por primera vez.</p>
+                                    </blockquote>
+                                    <pre><code class="lang-js"> // Esta funcion inicia artyom en el reconocimiento discontinuo (para conexiones http)
+function startOneCommandArtyom(){
+    artyom.fatality();// Detener cualquier instancia previa
+
+    setTimeout(function(){// Esperar 250ms para inicializar
+         artyom.initialize({
+            lang:&#x22;en-GB&#x22;,// Más lenguajes son soportados, lee la documentación
+            continuous:false,// Reconoce 1 solo comando y basta de escuchar
+            listen:true, // Iniciar !
+            debug:true, // Muestra un informe en la consola
+            speed:1 // Habla normalmente
+        }).then(function(){
+            console.log(&#x22;Ready to work !&#x22);
+        });
+    },250);
+}
+
+// Esta funcion inicia artyom en el reconocimiento continuo y obedecera comandos por siempre (requiere conexión https para prevenir el dialogo de permiso de microfono continuo)
+function startContinuousArtyom(){
+    artyom.fatality();// Detener cualquier instancia previa
+
+    setTimeout(function(){// Esperar 250ms para inicializar
+         artyom.initialize({
+            lang:&#x22;en-GB&#x22;,// Más lenguajes son soportados, lee la documentación
+            continuous:true,// Artyom obedecera por siempre
+            listen:true, // Iniciar !
+            debug:true, // Muestra un informe en la consola
+            speed:1 // Habla normalmente
+        }).then(function(){
+            console.log(&#x22;Ready to work !&#x22);
+        });
+    },250);
+}</code></pre>
+                                    <blockquote class="blockquote bq-primary">
+                                        <p class="bq-title"><i class='fa fa-info-circle'></i> Pro tip</p>
+                                        <p><b>Coloca la propiedad <code>debug</code> igual a <code>true</code> en la inicialización siempre si trabajas con artyom localmente</b>, de esta manera encontraras convenientes, mensajes valiosos e información util en la consola del explorador.</p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="section-languages">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-block">
+                                    <h4 class="card-title">Artyom soporta varios lenguajes</h4>
+                                    <p class="card-text">solo cambia el codigo de la propiedad <code>lang</code> al inicializar y listo</p>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row p-t-2">
+                                                <div class="col-md-2"  data-toggle="tooltip" title="ru-RU">
+                                                    <img src="https://raw.githubusercontent.com/sdkcarlos/sdkcarlos.github.io/master/sites/artyom-resources/images/flag-russia.png" alt="Russian русский" title="Russian русский" class="img-thumbnail">
+                                                </div>
+                                                <div class="col-md-2"  data-toggle="tooltip" title="ja-JP">
+                                                    <img src="https://raw.githubusercontent.com/sdkcarlos/sdkcarlos.github.io/master/sites/artyom-resources/images/flag-japan.png" alt="Japanese 日本人" title="Japanese 日本人" class="img-thumbnail">
+                                                </div>
+                                                <div class="col-md-2"  data-toggle="tooltip" title="nl-NL">
+                                                    <img src="https://raw.githubusercontent.com/sdkcarlos/sdkcarlos.github.io/master/sites/artyom-resources/images/flag-netherlands.png" alt="Dutch" title="Dutch" class="img-thumbnail">
+                                                </div>
+                                                <div class="col-md-2"  data-toggle="tooltip" title="id-ID">
+                                                    <img src="https://raw.githubusercontent.com/sdkcarlos/sdkcarlos.github.io/master/sites/artyom-resources/images/flag-indonesia.png" alt="Indonesian" title="Indonesian" class="img-thumbnail">
+                                                </div>
+                                                <div class="col-md-2"  data-toggle="tooltip" title="pl-PL">
+                                                    <img src="https://raw.githubusercontent.com/sdkcarlos/sdkcarlos.github.io/master/sites/artyom-resources/images/flag-poland.png" alt="Polski" title="Polski" class="img-thumbnail">
+                                                </div>
+                                                <div class="col-md-2"  data-toggle="tooltip" title="For Cantonese : zh-HK and Mandarin zh-CN">
+                                                    <img src="https://raw.githubusercontent.com/sdkcarlos/sdkcarlos.github.io/master/sites/artyom-resources/images/flag-china.png" alt="Chinese (cantonese and mandarin)" title="China (cantonese and mandarin)" class="img-thumbnail">
+                                                </div>
+                                            </div>
+                                            <div class="row p-t-2">
+                                                <div class="col-md-2" data-toggle="tooltip" title="en-US or en-GB">
+                                                    <img src="https://raw.githubusercontent.com/sdkcarlos/sdkcarlos.github.io/master/sites/artyom-resources/images/flag-usa.png" alt="English" class="img-thumbnail">
+                                                </div>
+                                                <div class="col-md-2" data-toggle="tooltip" title="pt-PT">
+                                                    <img src="https://raw.githubusercontent.com/sdkcarlos/sdkcarlos.github.io/master/sites/artyom-resources/images/flag-brasil.png" alt="Português" title="Português" class="img-thumbnail">
+                                                </div>
+                                                <div class="col-md-2"  data-toggle="tooltip" title="it-IT">
+                                                    <img src="https://raw.githubusercontent.com/sdkcarlos/sdkcarlos.github.io/master/sites/artyom-resources/images/flag-italy.png" alt="Italiano" title="Italiano" class="img-thumbnail" class="img-thumbnail">
+                                                </div>
+                                                <div class="col-md-2"  data-toggle="tooltip" title="es-ES">
+                                                    <img src="https://raw.githubusercontent.com/sdkcarlos/sdkcarlos.github.io/master/sites/artyom-resources/images/flag-spanish.png" alt="Español" title="Español" class="img-thumbnail" class="img-thumbnail">
+                                                </div>
+                                                <div class="col-md-2"  data-toggle="tooltip" title="de-DE">
+                                                    <img src="https://raw.githubusercontent.com/sdkcarlos/sdkcarlos.github.io/master/sites/artyom-resources/images/flag-german.png" alt="Deutsch" title="Deutsch" class="img-thumbnail">
+                                                </div>
+                                                <div class="col-md-2"  data-toggle="tooltip" title="fr-FR">
+                                                    <img src="https://raw.githubusercontent.com/sdkcarlos/sdkcarlos.github.io/master/sites/artyom-resources/images/flag-france.png" alt="Français" title="Français" class="img-thumbnail">
+                                                </div>
+                                            </div>
+                                            <div class="row p-t-2">
+                                                <div class="col-md-2"  data-toggle="tooltip" title="hi-IN">
+                                                    <img src="https://raw.githubusercontent.com/sdkcarlos/sdkcarlos.github.io/master/sites/artyom-resources/images/flag-hindi.png" alt="Hindi" title="Russian русский" class="img-thumbnail">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-block text-xs-center" style="width: 100%;min-height:100px;">
+                                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-7687344986141325"
+                                     data-ad-slot="3487567897"
+                                     data-ad-format="auto"></ins>
+                                <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section id="section-speechapi">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-block">
+                                    <h4 class="card-title">Sintesís de voz</h4>
+                                    <p class="card-text">Usa el método <code>artyom.say</code> para hacer a artyom hablar lo que desees.El lenguaje se obtiene a través de la propiedad lang en su inicialización.</p>
+                                    <blockquote class="blockquote bq-primary">
+                                        <p class="bq-title">Nota</p>
+                                        <p>Artyom remuve la limitación de la API tradicional (<a href="http://stackoverflow.com/questions/21947730/chrome-speech-synthesis-with-longer-texts" rel="nofollow" target="_blank">de máximo 150 caracteres. Lee más acerca de este problema aquí</a>).</p>
+                                        <p>Con artyom puedes sintesizar grandes bloques de texto sin bloquearse y respetando los callbacks onEnd and onStart.</p>
+                                    </blockquote>
+                                    <pre><code class="lang-js">artyom.say(&#x22;Buenos días, tengo hambre. Quieres comer algo?&#x22;,{
+    onStart:function(){
+        console.log(&#x22;Comenzando a leer texto&#x22;);
+    },
+    onEnd:function(){
+        console.log(&#x22;Texto leido satisfactoriamente&#x22;);
+    }
+});
+
+artyom.say(&#x22;Ahora dire esto&#x22;);
+
+artyom.say(&#x22;Y esto despues de que el texto anterior sea leído.&#x22;);</code></pre>
+                                    <blockquote class="blockquote bq-primary">
+                                        <p class="bq-title"><i class='fa fa-info-circle'></i> Pro tip</p>
+                                        <p>Divide el texto por ti mismo de la manera que quieras en bloques aún mas pequeños y usa <code>artyom.say</code> multiples veces para disminuir la probabilidad de la limitación de caracteres.</p>
+                                    </blockquote>
+                                    <h4 class="card-title">Sintetiza algo de texto</h4>
+                                    <p><b>Pruebalo tu mismo</b> copia todo el texto que quieras en el siguiente textarea y oprime Sintetizar para escucharlo!</p>
+                                    <form id='artyom-speech-form'>
+                                        <div class="md-form">
+                                            <textarea type="text" id="artyom-speech-textarea" class="md-textarea">Hola, como estás hoy?</textarea>
+                                        </div>
+                                        <input type='submit' class='btn btn-primary' id="artyom-speech-button" value='Sintetizar'/>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="section-speechtotext">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-block">
+                                    <h4 class="card-title">Voz a texto</h4>
+                                    <p class="card-text">Convierte lo que dices en texto usando un objeto Dictation de artyom. Crea tus propios dictados.</p>
+                                    <pre><code class="lang-js">var UserDictation = artyom.newDictation({
+    continuous:true, // Activar modo continuous if HTTPS connection
+    onResult:function(text){
+        // Mostrar texto en consola
+        console.log(text);
+    },
+    onStart:function(){
+        console.log(&#x22;Dictado iniciado&#x22;);
+    },
+    onEnd:function(){
+        alert(&#x22;Dictado detenido por el usuario&#x22;);
+    }
+});
+
+UserDictation.start();
+
+// Deten el dictado cuando quieras usando:
+// UserDictation.stop();</code></pre>
+                                    <blockquote class="blockquote bq-primary">
+                                        <p class="bq-title">Nota</p>
+                                        <p>Recuerda detener a artyom antes de iniciar un nuevo dictado usando <code>artyom.fatality</code> pues 2 instancias de <code>webkitSpeechRecognition</code> no puedes estar activas al mismo tiempo.</p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="section-otherfeatures">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-block">
+                                    <h4 class="card-title">Simula instrucciones sin decir una sola palabra </h4>
+                                    <p class="card-text">
+                                        Algo tímido? Puedes simular commandos sin usar el micrófono usando <code>artyom.simulateInstruction("hola")</code>.
+                                    </p>
+                                    <pre><code class="lang-js">/**
+ * Add a command that reacts to &#x22;Hello&#x22;
+ */
+artyom.addCommands([
+    {
+        indexes:[&#x22;Hola&#x22;],
+        action:function(){
+            alert(&#x22;Hey, como estás&#x22;);
+        }
+    }
+]);
+
+
+artyom.simulateInstruction(&#x22;Hola&#x22;); // Simular comando que reacciona a hola</code></pre>
+                                    <p>Intenta simular cualquiera de los comandos en este sitio  &#x22;hello&#x22;,&#x22;go to github&#x22; etc.</p>
+                                    <form id='artyom-simulate-form'>
+                                        <div class="md-form">
+                                            <input type="text" class="form-control" id="artyom-simulate-input" value="how are you?" />
+                                        </div>
+                                        <input type='submit' class='btn btn-primary' value='Simular'/>
+                                    </form>
+
+                                    <hr>
+                                    <h4 class="card-title">Obtener texto reconocido mientras artyom está activo</h4>
+                                    <p class="card-text">
+                                        Si quieres mostrar al usuario el texto que es reconocido mientras artyom está activo, puedes redirigir el buffer de salida usando <code>artyom.redirectRecognizedTextOutput</code>.
+                                    </p>
+                                    <pre><code class="lang-js">artyom.redirectRecognizedTextOutput(function(recognized,isFinal){
+    if(isFinal){
+        console.log(&#x22;Texto final reconocido: &#x22; + recognized);
+    }else{
+        console.log(recognized);
+    }
+});</code></pre>
+                                    <p>Todo lo que digas en el siguiente sitio web será mostrado en la siguiente area :</p>
+                                    <a href="javascript:void(0);" role="button" class="btn btn-primary-outline waves-effect">
+                                        Reconocido : <span id="artyom-redirect-output"></span>
+                                    </a>
+                                    <hr>
+                                    <h4 class="card-title">Pausa y reanuda el reconocimiento de comandos</h4>
+                                    <p class="card-text">
+                                        Puedes pausar el reconocimiento de comandos, no un objeto de speechRecognition. El reconocimiento de texto continuara, pero los comandos no serán ejecutados si es pausado usando el método <code>artyom.dontObey</code>.
+                                    </p>
+                                    <p class="card-text">
+                                        Para reanudar el reconocimiento de comandos usa el método <code>artyom.obey</code>. Alternativamente, puedes usar la propiedad obeyKeyword al inicializar, para reanudar el reconocimiento de comandos usando una palabra clave.
+                                    </p>
+                                    <pre><code class="lang-js">// Inicializando artyom
+// &#x3C;algo de codigo que inicializa&#x3E;
+// &#x3C;agregar el comando &#x22;decir hola&#x22;&#x3E;
+// Luego pausar reconocimiento de comandos
+artyom.dontObey();
+
+// Intenta ejecutar el comando decir hola ! y nada pasara,
+// pero en 10 segundos, el reconocimiento de comandos será reanudado
+setTimeout(function(){
+    artyom.obey();
+
+    // di decir hola y el comando será activado !
+}, 10000);
+</code></pre>
+                                    <hr>
+                                    <h4 class="card-title">Palabras clave en la inicialización</h4>
+                                    <p class="card-text">
+                                        Usa la palabra clave <code>executionKeyword</code> en la inicialización para ejecutar inmediatamente un comando a pesar de que sigas hablando.<br>
+                                        Usa la palabra clave <code>obeyKeyword</code> para reanudar el reconocimiento de comandos si este está pausado (<code>artyom.dontObey</code>). Si mencionas esta palabra clave mientras artyom está pausado, este será reanudado y continuará procesando comandos automaticamente.
+                                    </p>
+                                    <pre><code class="lang-js">// obeyKeyword
+// command : &#x22;reproducir música&#x22;
+// Si está pausado, puedes decir
+// reanudar reconocimiento de comandos, reproducir música
+artyom.initialize({
+    continuous:true,
+    lang:&#x22;es-ES&#x22;,
+    obeyKeyword: &#x22;reanudar reconocimiento de comandos&#x22;,
+    listen:true,
+    debug:true
+});
+// obeyKeyword
+// command : &#x22;reproducir música&#x22;
+// Para ejecutar inmediatamente el comando puedes decir :
+// reproducir música y hazlo ya
+artyom.initialize({
+    continuous:true,
+    lang:&#x22;es-ES&#x22;,
+    executionKeyword: &#x22;y hazlo ya&#x22;,
+    listen:true,
+    debug:true
+});</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="section-article">
+                    <h1 class="section-heading p-t-1 p-b-1">Trending tops en Our Code World</h1>
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="card article-ocw">
+                                <div class="view overlay hm-white-slight">
+                                    <img src="http://ourcodeworld.com/public-media/gallery/gallery-57836a36338b0.png" class="img-fluid" alt="">
+                                    <a href="#">
+                                        <div class="mask"></div>
+                                    </a>
+                                </div>
+                                <div class="card-block">
+                                    <h4 class="card-title">Top 7 : Mejores IDE para JavaScript, HTML and CSS</h4>
+                                    <p class="card-text">See the review from 7 of the best free IDE (and code editors) for web proyects development in Our Code World.</p>
+                                    <a href="http://ourcodeworld.com/articles/read/200/top-7-best-free-web-development-ide-for-javascript-html-and-css" target="_blank" class="btn btn-primary">Read article</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card article-ocw">
+                                <div class="view overlay hm-white-slight">
+                                    <img src="http://ourcodeworld.com/public-media/gallery/gallery-56cb273fd67fd.png" class="img-fluid" alt="">
+                                    <a href="#">
+                                        <div class="mask"></div>
+                                    </a>
+                                </div>
+                                <div class="card-block">
+                                    <h4 class="card-title">Top 5 : Mejores calendarios de eventos para aplicaciones web en Javascript y jQuery</h4>
+                                    <p class="card-text">See the review from 5 of the best dynamics scheduler and events calendar for Web applications with Javascript and jQuery in Our Code World</p>
+                                    <a href="http://ourcodeworld.com/articles/read/55/top-5-best-jquery-scheduler-and-events-calendar-for-web-applications" target="_blank" class="btn btn-primary">Read article</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card article-ocw">
+                                <div class="view overlay hm-white-slight">
+                                    <img src="http://ourcodeworld.com/public-media/gallery/gallery-57b6ce5559230.png" class="img-fluid" alt="">
+                                    <a href="#">
+                                        <div class="mask"></div>
+                                    </a>
+                                </div>
+                                <div class="card-block">
+                                    <h4 class="card-title">Top 20: Mejores plantillas de Administrador para bootstrap gratis</h4>
+                                    <p class="card-text ">See the collection from 20 of the most imponent Admin templates built in bootstrap for free in Our Code World.</p>
+                                    <a href="http://ourcodeworld.com/articles/read/238/top-20-best-free-bootstrap-admin-templates" target="_blank" class="btn btn-primary">Read article</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="section-ending">
+                    <h1 class="section-heading p-t-1 p-b-1">Gracias por llegar hasta aquí!</h1>
+                    <div class="row">
+                        <div class="col-md-6 m-b-2">
+                            <div class="card-overlay card-ending" style="background-image: url('../material/images/background-about.jpg')">
+                                <div class="white-text text-xs-center">
+                                    <div class="card-block">
+                                        <h5 class="teal-text"><i class="fa fa-star"></i> Apoya el proyecto</h5>
+                                        <h3>Te gusto artyom?</h3>
+                                        <p>Si es así, considera en darnos una estrella en el repositorio oficial de github y comparte este proyecto con tus amigos desarrolladores!</p>
+                                        <p>Ya somos <span id="artyom-ending-starred"><i class="fa fa-spinner fa-spin"></i></span> personas apoyando artyom.js</p>
+                                        <a href="https://github.com/sdkcarlos/artyom.js/stargazers" class="btn btn-lg btn-white-outline waves-effect waves-light" target="_blank"><i class="fa fa-star-o left"></i> Dar estrella </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 m-b-2">
+                            <div class="card-overlay card-ending" style="background-image: url('../material/images/background-about.jpg')">
+                                <div class="white-text text-xs-center">
+                                    <div class="card-block">
+                                        <h5 class="cyan-text"><i class="fa fa-support"></i> Necesitas ayuda?</h5>
+                                        <h3>Problemas e inconvenientes</h3>
+                                        <p>Si necesitas ayuda mientras implementas artyom en tu sitio y algo no funciona bien, no sabes como hacerlo, o tienes alguna sugerencia por favor reporta un ticket en el area de problemas en github (Por favor en Ingles).</p>
+                                        <a href='https://github.com/sdkcarlos/artyom.js/issues' target="_blank" class="btn btn-lg btn-white-outline waves-effect waves-light"><i class="fa fa-clone left"></i> Ver problemas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <footer class="page-footer center-on-small-only">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-1">
+                        <h5 class="title">Acerca de Artyom.js</h5>
+                        <p>Artyom es un robusto, pero facil de usar, wrapper de las APIs speechSynthesis y webkitSpeechRecognition.</p>
+
+                        <p>Agrega comandos, iniciar artyom, dale ordenes y espera por el resultado en tiempo real, de la misma manera en el que el famoso J.A.R.V.I.S lo hace.</p>
+                    </div>
+
+                    <hr class="hidden-md-up">
+
+                    <div class="col-md-3 col-md-offset-1">
+                        <h5 class="title">Otros proyectos</h5>
+                        <ul>
+                            <li><a href="https://sdkcarlos.github.io/sites/holdon.html">HoldOn.js (loading overlay)</a></li>
+                            <li><a href="http://ourcodeworld.com/apps/our-code-editor" target="_blank">Our Code Editor (android)</a></li>
+                            <li><a href="https://sdkcarlos.github.io/sites/ourcontextmenu.html" target="_blank">Our Context Menu</a></li>
+                        </ul>
+                    </div>
+
+                    <hr class="hidden-md-up">
+
+                    <div class="col-md-3">
+                        <h5 class="title">Sponsored links</h5>
+                        <ul>
+                            <li><a href="http://ourcodeworld.com/articles/read/213/introduction-to-the-javascript-promises" target="_blank">Introduction to the Javascript promises</a></li>
+                            <li><a href="http://ourcodeworld.com/articles/read/143/how-to-copy-text-to-clipboard-with-javascript-easily" target="_blank">How to copy text to clipboard with Javascript easily</a></li>
+                            <li><a href="http://ourcodeworld.com/articles/read/38/how-to-capture-an-image-from-a-dom-element-with-javascript" target="_blank">How to capture an image from a DOM element with javascript</a></li>
+                            <li><a href="http://ourcodeworld.com/articles/read/16/what-is-the-debounce-method-and-how-to-use-it-in-javascript" target="_blank">What is the debounce method and how to use it in Javascript</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="call-to-action">
+                <h4>Articulos de programación</h4>
+                <ul>
+                    <li>
+                        <h5>Visita Our Code World</h5></li>
+                    <li><a target="_blank" href="http://ourcodeworld.com" class="btn btn-default">Aprender más</a></li>
+                </ul>
+            </div>
+            <div class="footer-copyright">
+                <div class="container-fluid">
+                    &copy; 2016 Copyright Carlos Delgado - <a href="http://ourcodeworld.com">ourcodeworld.com</a>
+                </div>
+            </div>
+        </footer>
+        <script type="text/javascript" src="../material/js/jquery-2.2.3.min.js"></script>
+        <script type="text/javascript" src="../material/js/tether.min.js"></script>
+        <script type="text/javascript" src="../material/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../material/js/mdb.min.js"></script>
+        <script type="text/javascript" src="../material/js/sdkcarlos.min.js"></script>
+        <script type="text/javascript" src="../libs/prismjs/prism.js"></script>
+        <script type="text/javascript" src="../libs/matchheight/matchheight.js"></script>
+        <script type="text/javascript" src="../libs/artyom/artyomCommandsEs.js"></script>
+        <script>
+            function listArtyomVoices() {
+                var select = $("#tag-availablevoices");
+                var voices = artyom.getVoices();
+                select.empty();
+
+                for (var i = 0; i < voices.length; i++) {
+                    var voice = voices[i];
+                    select.append('<option>' + voice.name + '</option>');
+                }
+            }
+
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+
+                $('.scroll-to').click(function (e) {
+                    e.preventDefault();
+                    var el = $(this);
+                    sdkcarlos.scrollTo(el.attr('href'));
+                });
+
+                $('#artyom-speech-form').submit(function (e) {
+                    e.preventDefault();
+                    var btn = $('#artyom-speech-button');
+                    if (artyom.speechSupported()) {
+                        btn.addClass('disabled');
+                        btn.attr('disabled', 'disabled');
+
+                        var text = $('#artyom-speech-textarea').val();
+                        if (text) {
+                            var lines = $("#artyom-speech-textarea").val().split("\n").filter(function (e) {
+                                return e
+                            });
+                            var totalLines = lines.length - 1;
+
+                            for (var c = 0; c < lines.length; c++) {
+                                var line = lines[c];
+                                if (totalLines == c) {
+                                    artyom.say(line, {
+                                        onEnd: function () {
+                                            btn.removeAttr('disabled');
+                                            btn.removeClass('disabled');
+                                        }
+                                    });
+                                } else {
+                                    artyom.say(line);
+                                }
+                            }
+                        }
+                    } else {
+                        alert("Your browser cannot talk !");
+                    }
+                });
+
+                $('#artyom-simulate-form').submit(function (e) {
+                    e.preventDefault();
+                    artyom.simulateInstruction($('#artyom-simulate-input').val());
+                });
+
+                sdkcarlos.crossOrigin.getJSON('https://raw.githubusercontent.com/sdkcarlos/artyom.js/master/package.json', function (data) {
+                    $('#latest-stable-version').text(data.version);
+                });
+
+                var commands = artyom.getAvailableCommands();
+                var html;
+
+                for (var i = 0; i < commands.length; i++) {
+                    var cm = commands[i];
+
+                    html += '<tr>';
+                    html += '<td>' + cm.indexes.join(",") + '</td>';
+                    html += '<td>' + cm.description + '</td>';
+                    html += '<td>' + (cm.smart || "no") + '</td>';
+                    html += '</tr>';
+
+                    $('#command-table > tbody').html(html);
+                }
+
+                $('.article-ocw').matchHeight();
+                $('.card-ending').matchHeight();
+
+                $('#artyom-about-useragent').text(navigator.userAgent);
+
+                var statusBar = $('#artyom-about-panelinfo');
+
+                if (artyom.speechSupported()) {
+                    statusBar.append('<a class="btn btn-success btn-block">Síntesis disponible</a>&nbsp;');
+                } else {
+                    statusBar.append('<a class="btn btn-danger btn-block">Síntesis no disponible</a>&nbsp;');
+                }
+
+                if (artyom.recognizingSupported()) {
+                    statusBar.append('<a class="btn btn-success btn-block">Reconocimiento disponible</a>&nbsp;');
+                } else {
+                    statusBar.append('<a class="btn btn-danger btn-block">Reconocimiento no disponible</a>&nbsp;');
+                }
+
+                sdkcarlos.crossOrigin.getJSON("https://api.github.com/repos/sdkcarlos/artyom.js", function (data) {
+                    $('#artyom-ending-starred').html("<b>" + data.watchers_count + "</b>");
+                });
+            });
+
+            $(window).load(function () {
+                if (artyom.speechSupported()) {
+                    listArtyomVoices();
+
+                    if (localStorage.getItem('SpanishfirstTime') != 'false') {
+                        setTimeout(function () {
+                            artyom.initialize({lang:"es-ES"});
+                            artyom.say("Bienvenido y gracias por visitar este sitio web. Lee mas acerca de como puedes usar a artyom para darle un toque futurista y personal a tus proyectos.", {
+                                onEnd: function () {
+                                    localStorage.setItem('SpanishfirstTime', 'false');
+                                }
+                            });
+                        }, 500);
+                    }
+                }
+
+                if(artyom.recognizingSupported()){
+                    artyom.redirectRecognizedTextOutput(function(recognized,isFinal){
+                        if(isFinal){
+                            $("#artyom-redirect-output").text("");//Nothing
+                        }else{
+                            $("#artyom-redirect-output").text(recognized);
+                        }
+                    });
+
+                    artyom.initialize({
+                        executionKeyword:"y hazlo ahora",
+                        debug:true,
+                        continuous:true,
+                        lang:"es-ES",
+                        listen:true
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>
