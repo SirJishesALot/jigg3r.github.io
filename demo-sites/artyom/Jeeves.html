@@ -274,13 +274,15 @@ ol li a{color:#fff;}
 
         {
           indexes: ["Hello", "Hi", "Hello Jeeves", "Hi Jeeves", "Good morning"],
-          switch(artyom.getLanguage()) {
-            case "en_US":
-            case "en_GB":
+          action:function() {
+            switch(artyom.getLanguage()) {
+              case "en_US":
+              case "en_GB":
                 artyom.say("Hello, lovely day isn't it?");
                 break;
+              }
+            }
           }
-        }
 
         // {
         //   indexes: ["Show me a cat", "Give me a cat", "Cat", "I love cats", "I want a cat"].
