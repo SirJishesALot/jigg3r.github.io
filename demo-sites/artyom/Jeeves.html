@@ -270,7 +270,26 @@ ol li a{color:#fff;}
                     break;
                 }
             }
+        },
+
+        {
+          indexes: ["Hello", "Hi", "Hello Jeeves", "Hi Jeeves", "Good morning"],
+          switch(artyom.getLanguage()) {
+            case "en_US":
+            case "en_GB":
+                artyom.say("Hello, lovely day isn't it?");
+                break;
+          }
         }
+
+        // {
+        //   indexes: ["Show me a cat", "Give me a cat", "Cat", "I love cats", "I want a cat"].
+        //   switch(artyom.getLanguage()) {
+        //     case "en_US":
+        //     case "en_GB":
+        //         artyom.say("Ok, here you go.")
+        //   }
+        // }
     ];
 
     /**
