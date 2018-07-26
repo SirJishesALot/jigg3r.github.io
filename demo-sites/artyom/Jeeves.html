@@ -135,7 +135,7 @@ ol li a{color:#fff;}
     <p style="text-align:center;">
         A simple demostration of how to use Jeeves in Continuous mode , add all the notes that you want! They will be added in your Local Storage and will be accessible whenever you enter this site<br>
         Jeeves will always be able to listen to you if you allow the use of the microphone for the first time thanks to the <em>https://</em> connection.<br>
-        You can visit other websites while Jeeves is active! He will listen although another tab is on user focus<b>,visit the Facebook wall of your girlfriend while this site is opened and add some dead notes :)</b><br>
+        You can visit other websites while Jeeves is active! He will listen although another tab is on user focus<br>
         Click on any note, Jeeves will read it, and all the recognized text will appear here :<br>
         <span id="output-artyom" style="font-size: 20px;font-family: monospace;font-style: italic;color: coral;"></span>
     </p>
@@ -160,7 +160,7 @@ ol li a{color:#fff;}
 <script>
     var comandos = [
         {
-            description:"Trigger the creation of a note with your voice ! Say the command and replace the * With the content of your note. <br> Example: <b>Make me a note call my mother this sunday</b>",
+            description:"Trigger the creation of a note with your voice ! Say the command and replace the * With the content of your note. <br> Example: <i>Make me a note call my mother this sunday</i>",
             indexes:["Make me a note *","Create a note *","Remember me *","Creare una nota *","Crear nota *","Notiz hinzufügen *",'créer la note *'],
             smart:true,
             action:function(index,wildcard){
@@ -189,7 +189,7 @@ ol li a{color:#fff;}
             }
         },
         {
-            description:"Remove a note with the identified number! Replace the * With the number of an existing note <br> Example : <b>Remove note number 1</b>",
+            description:"Remove a note with the identified number! Replace the * With the number of an existing note <br> Example : <i>Remove note number 1</i>",
             indexes:["Remove note number *","Remove the note number *","Delete the note number *","Delete note number *","Eliminare la nota *","Entfernen Note *","Remover nota numero *","Supprimer la note *"],
             smart:true,
             action:function(index,wildcard){
