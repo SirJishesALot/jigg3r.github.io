@@ -25,6 +25,9 @@ body{
 h1 {
   text-align: center;
 }
+#mainLogo {
+  align-items: center;
+}
 h2,p{
   font-size:100%;
   font-weight:normal;
@@ -113,7 +116,7 @@ ol li a{color:#fff;}
     <p style="text-align:center;">
       <h1><u>Welcome to Jeeves!</u></h1>
         <a href="https://github.com/jigg3r/jigg3r.github.io">
-            <img src="../../sites/artyom-resources/images/waiters.png" width="200"/>
+            <img id = "mainLogo" src="../../sites/artyom-resources/images/waiters.png" width="200"/>
         </a>
     </p>
   <ol>
@@ -160,7 +163,7 @@ ol li a{color:#fff;}
 <script>
     var comandos = [
         {
-            description:"Trigger the creation of a note with your voice ! Say the command and replace the * With the content of your note. <br> Example: <i>Make me a note call my mother this sunday</i>",
+            description:"Trigger the creation of a note with your voice! Say the command and replace the * With the content of your note. <br> Example: <i>Make me a note to call my mother this sunday</i>",
             indexes:["Make me a note *","Create a note *","Remember me *","Creare una nota *","Crear nota *","Notiz hinzufügen *",'créer la note *'],
             smart:true,
             action:function(index,wildcard){
