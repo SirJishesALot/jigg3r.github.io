@@ -276,7 +276,9 @@ ol li a{color:#fff;}
           description: "Say hello to Jeeves!",
           indexes: ["Hello", "Hi", "Hello Jeeves", "Hi Jeeves", "good morning"],
           action:function() {
+            console.log("Test1");
             switch(artyom.getLanguage()) {
+              console.log("Test2");
               case "en_US":
                 alert("Hello");
                 break;
