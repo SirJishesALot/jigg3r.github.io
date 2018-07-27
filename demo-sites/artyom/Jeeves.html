@@ -280,7 +280,8 @@ ol li a{color:#fff;}
         }
     },
     {
-            indexes: ["translate * in Spanish","translate * in german"],
+            description: "Translate words or sentences from English to Spanish or German.",
+            indexes: ["translate * in Spanish","translate * in German"],
             smart:true,
             action : function(i,wildcard,sentence){
                 switch(i){
@@ -314,14 +315,18 @@ ol li a{color:#fff;}
             }
         }
 
-        // {
-        //   indexes: ["Show me a cat", "Give me a cat", "Cat", "I love cats", "I want a cat"].
-        //   switch(artyom.getLanguage()) {
-        //     case "en_US":
-        //     case "en_GB":
-        //         artyom.say("Ok, here you go.")
-        //   }
-        // }
+        {
+          description: "Shows you a picture of a cat",
+          indexes: ["Show me a cat", "Give me a cat", "Cat", "I love cats", "I want a cat"],
+            action: function() {
+              artyom.say("Okay, here you go.", {
+                onEnd: function() {
+                  window.open(https://i.ytimg.com/vi/YCaGYUIfdy4/maxresdefault.jpg);
+                }
+              });
+            }
+          }
+
     ];
 
     /**
